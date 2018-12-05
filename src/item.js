@@ -1,19 +1,19 @@
 import React from 'react';
 
+import Store from './store'
 import minecraftItems from './minecraft-items.json'
 
 class Item extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			item: "minecraft:emerald:0",
-			min: 0,
-			max: 0
-		};
-	}
-
 	onChangeItem(event) {
-		return this.setState({ item: event.target.value })
+		const payload = { 
+			path: this.props.path,
+			item: event.target.value
+		}
+
+		Store.dispatch({
+			type: "CHANGE_ITEM",
+			payload
+		})
 	}
 	onChangeMin(event) {
 		return this.setState({ min: event.target.value })
@@ -23,35 +23,38 @@ class Item extends React.Component {
 	}
 
 	render() {
+		const { item, quantity } = this.props.model
+		let min = 0
+		let max = 0
+		if(typeof quantity === typeof 1) {
+			min = quantity
+			max = quantity
+		}
 		return (
 			<div className="item">
-				<div>
-					<p>Image</p>
-				</div>
 				<form>
 					<div>
-						<p>Item: </p>
-						<select value={this.state.item} onChange={val => this.onChangeItem(val)}>
+						<select value={item} onChange={val => this.onChangeItem(val)}>
 							{minecraftItems.items.map(item => {
-								const id = "minecraft:" + item.text_type + ":" + item.meta
+								let id = "minecraft:" + item.text_type
+								if(item.meta !== 0) id += ":" + item.meta
+
 								return <option key={id} value={id}>{item.name}</option>
 							})}
 						</select>
 					</div>
 					<div>
-						<p>Min: </p>
+						<label>Min: </label>
 						<input 
 							type="number" 
-							value={this.state.min}  
+							value={min}  
 							onChange={val => this.onChangeMin(val)}
 							min={0}
 							max={64}/>
-					</div>
-					<div>
-						<p>Max: </p>
+						<label>Max: </label>
 						<input 
 							type="number" 
-							value={this.state.max}  
+							value={max}  
 							onChange={val => this.onChangeMax(val)}
 							min={0}
 							max={64}/>

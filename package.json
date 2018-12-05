@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +22,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "description": "Builds addon JSON for easily modifying Minecraft Villagers",
+  "main": "src/index.js",
+  "repository": "https://github.com/qwertynerd97/Villager-Maker.git",
+  "author": "Elli Howard <qwertynerd97@gmail.com>",
+  "license": "MIT"
 }

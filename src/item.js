@@ -1,17 +1,19 @@
 import React from 'react';
 
+import minecraftItems from './minecraft-items.json'
+
 class Item extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			item: "minecraft:wheat",
+			item: "minecraft:emerald:0",
 			min: 0,
 			max: 0
 		};
 	}
 
-	onChangeItem(value) {
-		return this.setState({ item: value })
+	onChangeItem(event) {
+		return this.setState({ item: event.target.value })
 	}
 	onChangeMin(event) {
 		return this.setState({ min: event.target.value })
@@ -19,7 +21,6 @@ class Item extends React.Component {
 	onChangeMax(event) {
 		return this.setState({ max: event.target.value })
 	}
-
 
 	render() {
 		return (
@@ -31,8 +32,10 @@ class Item extends React.Component {
 					<div>
 						<p>Item: </p>
 						<select value={this.state.item} onChange={val => this.onChangeItem(val)}>
-							<option value="minecraft:emerald">Emerald</option>
-							<option value="minecraft:wheat">Wheat</option>
+							{minecraftItems.items.map(item => {
+								const id = "minecraft:" + item.text_type + ":" + item.meta
+								return <option key={id} value={id}>{item.name}</option>
+							})}
 						</select>
 					</div>
 					<div>

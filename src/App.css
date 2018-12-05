@@ -30,3 +30,15 @@
     transform: rotate(360deg);
   }
 }
+
+.trade {
+  background: #c6c6c6;
+  border-radius: .5em;
+  margin: .5em;
+}
+
+.trade-container {
+  display: inline-block;
+  margin: .2em;
+  padding: .5em;
+}
